@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { dark } from "@clerk/ui/themes";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -60,7 +62,16 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             lang="en"
             className={`dark ${geistSans.variable} ${geistMono.variable} ${bricolage.variable} h-full antialiased`}
         >
-            <body className="min-h-full flex flex-col">{children}</body>
+            <body className="min-h-full flex flex-col">
+                <ClerkProvider
+                    appearance={{
+                        theme: dark,
+                        variables: { colorPrimary: "oklch(0.74 0.16 55)" },
+                    }}
+                >
+                    {children}
+                </ClerkProvider>
+            </body>
         </html>
     );
 }
