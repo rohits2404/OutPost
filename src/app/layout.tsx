@@ -3,6 +3,10 @@ import { Bricolage_Grotesque, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/ui/themes";
+import { Toaster } from "@/components/ui/sonner";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import { UpgradeDialogProvider } from "@/components/UpgradeDialog";
+import { AppShell } from "@/components/AppShell";
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -69,7 +73,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
                         variables: { colorPrimary: "oklch(0.74 0.16 55)" },
                     }}
                 >
-                    {children}
+                    <TooltipProvider>
+                        <UpgradeDialogProvider>
+                            <AppShell>{children}</AppShell>
+                        </UpgradeDialogProvider>
+                    </TooltipProvider>
+                    <Toaster richColors />
                 </ClerkProvider>
             </body>
         </html>
