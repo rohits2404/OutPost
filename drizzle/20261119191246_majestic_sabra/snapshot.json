@@ -1,0 +1,933 @@
+{
+    "type": "base",
+    "version": "9",
+    "dialect": "postgres",
+    "id": "083086c2-be31-4db8-bee6-6057a3c623cf",
+    "prevIds": ["00000000-0000-0000-0000-000000000000"],
+    "footprints": [
+        {
+            "statementType": "create_enum",
+            "statementTarget": ["enum", "public", "WorkspaceStatus"],
+            "writes": [
+                "s|enum|public.WorkspaceStatus",
+                "n|enum|public.WorkspaceStatus",
+                "e|enum|public.WorkspaceStatus",
+                "n|type|public.WorkspaceStatus"
+            ],
+            "reads": ["n|sch|public"]
+        },
+        {
+            "statementType": "create_table",
+            "statementTarget": ["table", "public", "AgentPrompt"],
+            "writes": [
+                "s|tbl|public.AgentPrompt",
+                "n|tbl|public.AgentPrompt",
+                "e|tbl|public.AgentPrompt",
+                "n|rel|public.AgentPrompt",
+                "n|type|public.AgentPrompt",
+                "n|rel|public.AgentPrompt_pkey"
+            ],
+            "reads": ["n|sch|public"]
+        },
+        {
+            "statementType": "create_table",
+            "statementTarget": ["table", "public", "Canvas"],
+            "writes": [
+                "s|tbl|public.Canvas",
+                "n|tbl|public.Canvas",
+                "e|tbl|public.Canvas",
+                "n|rel|public.Canvas",
+                "n|type|public.Canvas",
+                "n|rel|public.Canvas_pkey",
+                "n|rel|public.Canvas_workspaceId_key"
+            ],
+            "reads": ["n|sch|public"]
+        },
+        {
+            "statementType": "create_table",
+            "statementTarget": ["table", "public", "Doc"],
+            "writes": [
+                "s|tbl|public.Doc",
+                "n|tbl|public.Doc",
+                "e|tbl|public.Doc",
+                "n|rel|public.Doc",
+                "n|type|public.Doc",
+                "n|rel|public.Doc_pkey",
+                "n|rel|public.Doc_workspaceId_key"
+            ],
+            "reads": ["n|sch|public"]
+        },
+        {
+            "statementType": "create_table",
+            "statementTarget": ["table", "public", "User"],
+            "writes": [
+                "s|tbl|public.User",
+                "n|tbl|public.User",
+                "e|tbl|public.User",
+                "n|rel|public.User",
+                "n|type|public.User",
+                "n|rel|public.User_pkey",
+                "n|rel|public.User_clerkId_key",
+                "n|rel|public.User_email_key"
+            ],
+            "reads": ["n|sch|public"]
+        },
+        {
+            "statementType": "create_table",
+            "statementTarget": ["table", "public", "Workspace"],
+            "writes": [
+                "s|tbl|public.Workspace",
+                "n|tbl|public.Workspace",
+                "e|tbl|public.Workspace",
+                "n|rel|public.Workspace",
+                "n|type|public.Workspace",
+                "n|rel|public.Workspace_pkey",
+                "n|rel|public.Workspace_shareToken_key"
+            ],
+            "reads": ["n|sch|public", "n|enum|public.WorkspaceStatus"]
+        },
+        {
+            "statementType": "create_index",
+            "statementTarget": [
+                "index",
+                "public",
+                "AgentPrompt",
+                "AgentPrompt_ownerId_createdAt_idx"
+            ],
+            "writes": [
+                "s|idx|public.AgentPrompt_ownerId_createdAt_idx",
+                "n|idx|public.AgentPrompt_ownerId_createdAt_idx",
+                "e|idx|public.AgentPrompt_ownerId_createdAt_idx",
+                "n|rel|public.AgentPrompt_ownerId_createdAt_idx"
+            ],
+            "reads": [
+                "n|tbl|public.AgentPrompt",
+                "n|sch|public",
+                "n|col|public.AgentPrompt.ownerId",
+                "n|col|public.AgentPrompt.createdAt"
+            ]
+        },
+        {
+            "statementType": "create_index",
+            "statementTarget": [
+                "index",
+                "public",
+                "Workspace",
+                "Workspace_creatorId_idx"
+            ],
+            "writes": [
+                "s|idx|public.Workspace_creatorId_idx",
+                "n|idx|public.Workspace_creatorId_idx",
+                "e|idx|public.Workspace_creatorId_idx",
+                "n|rel|public.Workspace_creatorId_idx"
+            ],
+            "reads": [
+                "n|tbl|public.Workspace",
+                "n|sch|public",
+                "n|col|public.Workspace.creatorId"
+            ]
+        },
+        {
+            "statementType": "create_index",
+            "statementTarget": [
+                "index",
+                "public",
+                "Workspace",
+                "Workspace_clerkOrgId_idx"
+            ],
+            "writes": [
+                "s|idx|public.Workspace_clerkOrgId_idx",
+                "n|idx|public.Workspace_clerkOrgId_idx",
+                "e|idx|public.Workspace_clerkOrgId_idx",
+                "n|rel|public.Workspace_clerkOrgId_idx"
+            ],
+            "reads": [
+                "n|tbl|public.Workspace",
+                "n|sch|public",
+                "n|col|public.Workspace.clerkOrgId"
+            ]
+        },
+        {
+            "statementType": "create_fk",
+            "statementTarget": ["table", "public", "AgentPrompt"],
+            "writes": [
+                "s|fk|public.AgentPrompt.AgentPrompt_userId_User_id_fkey",
+                "n|fk|public.AgentPrompt.AgentPrompt_userId_User_id_fkey",
+                "e|fk|public.AgentPrompt.AgentPrompt_userId_User_id_fkey",
+                "n|con|public.AgentPrompt.AgentPrompt_userId_User_id_fkey"
+            ],
+            "reads": [
+                "n|tbl|public.AgentPrompt",
+                "n|sch|public",
+                "n|tbl|public.User",
+                "n|sch|public",
+                "n|col|public.AgentPrompt.userId",
+                "n|col|public.User.id",
+                "e|uniqueness|public.User.id"
+            ]
+        },
+        {
+            "statementType": "create_fk",
+            "statementTarget": ["table", "public", "AgentPrompt"],
+            "writes": [
+                "s|fk|public.AgentPrompt.AgentPrompt_workspaceId_Workspace_id_fkey",
+                "n|fk|public.AgentPrompt.AgentPrompt_workspaceId_Workspace_id_fkey",
+                "e|fk|public.AgentPrompt.AgentPrompt_workspaceId_Workspace_id_fkey",
+                "n|con|public.AgentPrompt.AgentPrompt_workspaceId_Workspace_id_fkey"
+            ],
+            "reads": [
+                "n|tbl|public.AgentPrompt",
+                "n|sch|public",
+                "n|tbl|public.Workspace",
+                "n|sch|public",
+                "n|col|public.AgentPrompt.workspaceId",
+                "n|col|public.Workspace.id",
+                "e|uniqueness|public.Workspace.id"
+            ]
+        },
+        {
+            "statementType": "create_fk",
+            "statementTarget": ["table", "public", "Canvas"],
+            "writes": [
+                "s|fk|public.Canvas.Canvas_workspaceId_Workspace_id_fkey",
+                "n|fk|public.Canvas.Canvas_workspaceId_Workspace_id_fkey",
+                "e|fk|public.Canvas.Canvas_workspaceId_Workspace_id_fkey",
+                "n|con|public.Canvas.Canvas_workspaceId_Workspace_id_fkey"
+            ],
+            "reads": [
+                "n|tbl|public.Canvas",
+                "n|sch|public",
+                "n|tbl|public.Workspace",
+                "n|sch|public",
+                "n|col|public.Canvas.workspaceId",
+                "n|col|public.Workspace.id",
+                "e|uniqueness|public.Workspace.id"
+            ]
+        },
+        {
+            "statementType": "create_fk",
+            "statementTarget": ["table", "public", "Doc"],
+            "writes": [
+                "s|fk|public.Doc.Doc_workspaceId_Workspace_id_fkey",
+                "n|fk|public.Doc.Doc_workspaceId_Workspace_id_fkey",
+                "e|fk|public.Doc.Doc_workspaceId_Workspace_id_fkey",
+                "n|con|public.Doc.Doc_workspaceId_Workspace_id_fkey"
+            ],
+            "reads": [
+                "n|tbl|public.Doc",
+                "n|sch|public",
+                "n|tbl|public.Workspace",
+                "n|sch|public",
+                "n|col|public.Doc.workspaceId",
+                "n|col|public.Workspace.id",
+                "e|uniqueness|public.Workspace.id"
+            ]
+        },
+        {
+            "statementType": "create_fk",
+            "statementTarget": ["table", "public", "Workspace"],
+            "writes": [
+                "s|fk|public.Workspace.Workspace_creatorId_User_id_fkey",
+                "n|fk|public.Workspace.Workspace_creatorId_User_id_fkey",
+                "e|fk|public.Workspace.Workspace_creatorId_User_id_fkey",
+                "n|con|public.Workspace.Workspace_creatorId_User_id_fkey"
+            ],
+            "reads": [
+                "n|tbl|public.Workspace",
+                "n|sch|public",
+                "n|tbl|public.User",
+                "n|sch|public",
+                "n|col|public.Workspace.creatorId",
+                "n|col|public.User.id",
+                "e|uniqueness|public.User.id"
+            ]
+        }
+    ],
+    "ddl": [
+        {
+            "schema": "public",
+            "name": "AgentPrompt",
+            "isRlsEnabled": false,
+            "entityType": "tables"
+        },
+        {
+            "schema": "public",
+            "name": "Canvas",
+            "isRlsEnabled": false,
+            "entityType": "tables"
+        },
+        {
+            "schema": "public",
+            "name": "Doc",
+            "isRlsEnabled": false,
+            "entityType": "tables"
+        },
+        {
+            "schema": "public",
+            "name": "User",
+            "isRlsEnabled": false,
+            "entityType": "tables"
+        },
+        {
+            "schema": "public",
+            "name": "Workspace",
+            "isRlsEnabled": false,
+            "entityType": "tables"
+        },
+        {
+            "schema": "public",
+            "name": "WorkspaceStatus",
+            "values": ["PLANNING", "IN_PROGRESS", "IN_REVIEW", "DONE"],
+            "entityType": "enums"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "id",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "ownerId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "userId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "workspaceId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "createdAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": "now()",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "id",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "workspaceId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "content",
+            "type": "jsonb",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "createdAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": "now()",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "updatedAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "id",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "workspaceId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "content",
+            "type": "jsonb",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "yjsState",
+            "type": "bytea",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "createdAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": "now()",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "updatedAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "id",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "clerkId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "email",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "name",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "imageUrl",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "createdAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": "now()",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "updatedAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "id",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "name",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "description",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "creatorId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "clerkOrgId",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "status",
+            "type": "WorkspaceStatus",
+            "typeSchema": "public",
+            "notNull": true,
+            "dimensions": 0,
+            "default": "'PLANNING'",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "position",
+            "type": "double precision",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": "0",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "shareToken",
+            "type": "text",
+            "typeSchema": null,
+            "notNull": false,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "createdAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": "now()",
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "updatedAt",
+            "type": "timestamp(3)",
+            "typeSchema": null,
+            "notNull": true,
+            "dimensions": 0,
+            "default": null,
+            "generated": null,
+            "identity": null,
+            "entityType": "columns"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "AgentPrompt_ownerId_createdAt_idx",
+            "nameExplicit": true,
+            "columns": [
+                {
+                    "value": "ownerId",
+                    "isExpression": false,
+                    "asc": true,
+                    "nullsFirst": false,
+                    "opclass": null
+                },
+                {
+                    "value": "createdAt",
+                    "isExpression": false,
+                    "asc": true,
+                    "nullsFirst": false,
+                    "opclass": null
+                }
+            ],
+            "isUnique": false,
+            "where": null,
+            "with": "",
+            "method": "btree",
+            "concurrently": false,
+            "entityType": "indexes"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "Workspace_creatorId_idx",
+            "nameExplicit": true,
+            "columns": [
+                {
+                    "value": "creatorId",
+                    "isExpression": false,
+                    "asc": true,
+                    "nullsFirst": false,
+                    "opclass": null
+                }
+            ],
+            "isUnique": false,
+            "where": null,
+            "with": "",
+            "method": "btree",
+            "concurrently": false,
+            "entityType": "indexes"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "Workspace_clerkOrgId_idx",
+            "nameExplicit": true,
+            "columns": [
+                {
+                    "value": "clerkOrgId",
+                    "isExpression": false,
+                    "asc": true,
+                    "nullsFirst": false,
+                    "opclass": null
+                }
+            ],
+            "isUnique": false,
+            "where": null,
+            "with": "",
+            "method": "btree",
+            "concurrently": false,
+            "entityType": "indexes"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "AgentPrompt_userId_User_id_fkey",
+            "nameExplicit": false,
+            "columns": ["userId"],
+            "schemaTo": "public",
+            "tableTo": "User",
+            "columnsTo": ["id"],
+            "onUpdate": "NO ACTION",
+            "onDelete": "CASCADE",
+            "entityType": "fks"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "AgentPrompt_workspaceId_Workspace_id_fkey",
+            "nameExplicit": false,
+            "columns": ["workspaceId"],
+            "schemaTo": "public",
+            "tableTo": "Workspace",
+            "columnsTo": ["id"],
+            "onUpdate": "NO ACTION",
+            "onDelete": "SET NULL",
+            "entityType": "fks"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "Canvas_workspaceId_Workspace_id_fkey",
+            "nameExplicit": false,
+            "columns": ["workspaceId"],
+            "schemaTo": "public",
+            "tableTo": "Workspace",
+            "columnsTo": ["id"],
+            "onUpdate": "NO ACTION",
+            "onDelete": "CASCADE",
+            "entityType": "fks"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "Doc_workspaceId_Workspace_id_fkey",
+            "nameExplicit": false,
+            "columns": ["workspaceId"],
+            "schemaTo": "public",
+            "tableTo": "Workspace",
+            "columnsTo": ["id"],
+            "onUpdate": "NO ACTION",
+            "onDelete": "CASCADE",
+            "entityType": "fks"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "Workspace_creatorId_User_id_fkey",
+            "nameExplicit": false,
+            "columns": ["creatorId"],
+            "schemaTo": "public",
+            "tableTo": "User",
+            "columnsTo": ["id"],
+            "onUpdate": "NO ACTION",
+            "onDelete": "CASCADE",
+            "entityType": "fks"
+        },
+        {
+            "schema": "public",
+            "table": "AgentPrompt",
+            "name": "AgentPrompt_pkey",
+            "columns": ["id"],
+            "nameExplicit": false,
+            "entityType": "pks"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "Canvas_pkey",
+            "columns": ["id"],
+            "nameExplicit": false,
+            "entityType": "pks"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "Doc_pkey",
+            "columns": ["id"],
+            "nameExplicit": false,
+            "entityType": "pks"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "User_pkey",
+            "columns": ["id"],
+            "nameExplicit": false,
+            "entityType": "pks"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "Workspace_pkey",
+            "columns": ["id"],
+            "nameExplicit": false,
+            "entityType": "pks"
+        },
+        {
+            "schema": "public",
+            "table": "Canvas",
+            "name": "Canvas_workspaceId_key",
+            "nameExplicit": false,
+            "columns": ["workspaceId"],
+            "nullsNotDistinct": false,
+            "entityType": "uniques"
+        },
+        {
+            "schema": "public",
+            "table": "Doc",
+            "name": "Doc_workspaceId_key",
+            "nameExplicit": false,
+            "columns": ["workspaceId"],
+            "nullsNotDistinct": false,
+            "entityType": "uniques"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "User_clerkId_key",
+            "nameExplicit": false,
+            "columns": ["clerkId"],
+            "nullsNotDistinct": false,
+            "entityType": "uniques"
+        },
+        {
+            "schema": "public",
+            "table": "User",
+            "name": "User_email_key",
+            "nameExplicit": false,
+            "columns": ["email"],
+            "nullsNotDistinct": false,
+            "entityType": "uniques"
+        },
+        {
+            "schema": "public",
+            "table": "Workspace",
+            "name": "Workspace_shareToken_key",
+            "nameExplicit": false,
+            "columns": ["shareToken"],
+            "nullsNotDistinct": false,
+            "entityType": "uniques"
+        }
+    ]
+}
