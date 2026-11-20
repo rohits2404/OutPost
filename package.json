@@ -11,6 +11,7 @@
     "dependencies": {
         "@clerk/nextjs": "^7.10.5",
         "@clerk/ui": "^1.44.1",
+        "@hello-pangea/dnd": "^18.0.1",
         "@paralleldrive/cuid2": "^3.3.0",
         "class-variance-authority": "^0.7.1",
         "cn": "^0.5.2",
