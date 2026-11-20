@@ -89,6 +89,16 @@
         @apply border-border outline-ring/50;
     }
 
+    /* Hide scrollbars globally, but preserve scrolling */
+    * {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE and Edge */
+    }
+
+    *::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera */
+    }
+
     body {
         @apply bg-background text-foreground relative;
     }
